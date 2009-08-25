@@ -17,7 +17,7 @@ public class Main
 		for (String n : Serial.list()) {
 		  System.out.println(n);
 		}
-		String portName = "COM13";
+		String portName = "COM11";
 		int baud = 9600;
 		String fileName = "gcode.txt";
 
