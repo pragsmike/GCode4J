@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.gorb.gcode;
 
 import java.io.IOException;
