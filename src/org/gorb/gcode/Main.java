@@ -13,13 +13,14 @@ public class Main
 {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException {
+		String fileName = "gcode.txt";
+
 		// Print a list of the serial ports, for debugging purposes:
 		for (String n : Serial.list()) {
 		  System.out.println(n);
 		}
 		String portName = "COM11";
 		int baud = 9600;
-		String fileName = "gcode.txt";
 
 		Sender sender = new Sender();
 		Serial serial = new PortableSerial(sender, portName, baud);

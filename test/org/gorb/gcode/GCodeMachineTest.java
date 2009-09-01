@@ -63,6 +63,8 @@ public class GCodeMachineTest
 		machine.start();
 		
 		waitForMachine();
+		assertFalse(machine.isBusy());
+		assertFalse(machine.isPlaying());
 		verify(listener);
 	}
 	@Test

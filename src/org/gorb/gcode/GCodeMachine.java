@@ -42,8 +42,8 @@ public class GCodeMachine implements SenderListener
 		if (linesIterator == null)
 			return;
 		if (aborted) {
-			listener.abortedPlaying(fileName);
 			linesIterator = null;
+			listener.abortedPlaying(fileName);
 			paused = false;
 			synchronized (this) { notifyAll(); }
 			return;
@@ -51,8 +51,8 @@ public class GCodeMachine implements SenderListener
 		if (paused)
 			return;
 		if (!linesIterator.hasNext()) {
-			listener.finishedPlaying(fileName);
 			linesIterator = null;
+			listener.finishedPlaying(fileName);
 			synchronized (this) { notifyAll(); }
 			return;
 		}
