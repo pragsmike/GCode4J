@@ -8,7 +8,7 @@ public class SenderSimulator extends Sender
 	
 	@Override
 	public void send(final String string) {
-		System.out.println("R " + string);
+		System.out.print("R " + string);
 		new Thread() {
 			public void run() { try { respond(string); } catch (Throwable t) {}};
 		}.start();

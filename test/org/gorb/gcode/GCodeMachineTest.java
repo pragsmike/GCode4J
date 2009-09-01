@@ -1,7 +1,7 @@
 package org.gorb.gcode;
 
-import static org.junit.Assert.*;
 import static org.easymock.classextension.EasyMock.*;
+import static org.junit.Assert.*;
 
 import org.easymock.IAnswer;
 import org.easymock.classextension.EasyMock;
@@ -17,6 +17,11 @@ public class GCodeMachineTest
 		machine.setListener(listener);
 		machine.setSender(fakeSender);
 	}
+
+	private void waitForMachine() throws InterruptedException {
+		synchronized(machine) { machine.wait(10); }
+	} 
+
 
 	@Test
 	public void testOpenFile() throws Exception {
@@ -45,23 +50,28 @@ public class GCodeMachineTest
 	public void testStartAndFinish() throws Exception {
 		listener.fileLoaded("testLines.txt", "G20\nG91\n");
 		listener.startedPlaying("testLines.txt");
+		listener.busy(true);
 		listener.sentLine("G20");
+		listener.busy(false);
+		listener.busy(true);
 		listener.sentLine("G91");
+		listener.busy(false);
 		listener.finishedPlaying("testLines.txt");
 		replay(listener);
 		
 		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
 		machine.start();
 		
-		synchronized(machine) { machine.wait(10); }
+		waitForMachine();
 		verify(listener);
-	} 
-
+	}
 	@Test
 	public void testStartAndAbort() throws Exception {
 		listener.fileLoaded("testLines.txt", "G20\nG91\n");
 		listener.startedPlaying("testLines.txt");
+		listener.busy(true);
 		listener.sentLine("G20");
+		listener.busy(false);
 		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
 			@Override
 			public Object answer() throws Throwable {
@@ -75,7 +85,8 @@ public class GCodeMachineTest
 		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
 		machine.start();
 		
-		synchronized(machine) { machine.wait(10); }
+		waitForMachine();
+		assertFalse(machine.isPlaying());
 		verify(listener);
 	} 
 
@@ -84,7 +95,9 @@ public class GCodeMachineTest
 	public void testStartAndAbortThenStartAndFinish() throws Exception {
 		listener.fileLoaded("testLines.txt", "G20\nG91\n");
 		listener.startedPlaying("testLines.txt");
+		listener.busy(true);
 		listener.sentLine("G20");
+		listener.busy(false);
 		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
 			@Override
 			public Object answer() throws Throwable {
@@ -95,20 +108,134 @@ public class GCodeMachineTest
 		});
 		listener.abortedPlaying("testLines.txt");
 		listener.startedPlaying("testLines.txt");
+		listener.busy(true);
 		listener.sentLine("G20");
+		listener.busy(false);
+		listener.busy(true);
 		listener.sentLine("G91");
+		listener.busy(false);
 		listener.finishedPlaying("testLines.txt");
 		replay(listener);
 		
 		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
 		machine.start();
 		
-		synchronized(machine) { machine.wait(10); }
+		waitForMachine();
+		assertFalse(machine.isPlaying());
 		
 		fakeSender.reset();
 		machine.start();
-		synchronized(machine) { machine.wait(10); }
+		waitForMachine();
+		assertFalse(machine.isPlaying());
 
 		verify(listener);
 	} 
+	
+	@Test
+	public void testExecImmediate() throws Exception {
+		listener.busy(true);
+		listener.sentLine("G20");
+		listener.busy(false);
+		replay(listener);
+		
+		machine.execImmediate("G20");
+		
+		waitForMachine();
+		verify(listener);
+	}
+	
+	@Test
+	public void testStartThenPauseThenResume() throws Exception {
+		listener.fileLoaded("testLines.txt", "G20\nG91\n");
+		listener.startedPlaying("testLines.txt");
+		listener.busy(true);
+		listener.sentLine("G20");
+		listener.busy(false);
+		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
+			@Override
+			public Object answer() throws Throwable {
+				if (countOfLogCalls++ == 0)
+					machine.pause();
+				return null;
+			}
+		});
+		listener.pausedPlaying("testLines.txt");
+		listener.resumedPlaying("testLines.txt");
+		listener.busy(true);
+		listener.sentLine("G91");
+		listener.busy(false);
+		listener.finishedPlaying("testLines.txt");
+		replay(listener);
+		
+		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
+		machine.start();
+		
+		waitForMachine();
+		assertTrue(machine.isPaused());
+		assertTrue(machine.isPlaying());
+		
+		machine.resume();
+		assertFalse(machine.isPaused());
+		assertTrue(machine.isPlaying());
+		
+		waitForMachine();
+		assertFalse(machine.isPlaying());
+		assertFalse(machine.isPaused());
+
+		verify(listener);
+		
+	}
+	@Test
+	public void testStartThenPauseThenAbort() throws Exception {
+		listener.fileLoaded("testLines.txt", "G20\nG91\n");
+		listener.startedPlaying("testLines.txt");
+		listener.busy(true);
+		listener.sentLine("G20");
+		listener.busy(false);
+		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
+			@Override
+			public Object answer() throws Throwable {
+				if (countOfLogCalls++ == 0)
+					machine.pause();
+				return null;
+			}
+		});
+		listener.pausedPlaying("testLines.txt");
+		listener.abortedPlaying("testLines.txt");
+		replay(listener);
+		
+		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
+		machine.start();
+		
+		waitForMachine();
+		assertTrue(machine.isPaused());
+		assertTrue(machine.isPlaying());
+		
+		machine.abort();
+		assertFalse(machine.isPaused());
+		assertFalse(machine.isPlaying());
+		
+		waitForMachine();
+		assertFalse(machine.isPlaying());
+		assertFalse(machine.isPaused());
+
+		verify(listener);
+		
+	}
+
+	@Test
+	public void testJog() throws Exception {
+		Jogger jogger = createMock(Jogger.class);
+		Sender sender = createMock(Sender.class);
+		
+		sender.setListener(machine);
+		expect(jogger.jog("1", "n")).andReturn("a");
+		sender.send("a\n");
+		replay(jogger, sender);
+		
+		machine.setJogger(jogger);
+		machine.setSender(sender);
+		machine.jog("n");
+		verify(jogger, sender);
+	}
 }

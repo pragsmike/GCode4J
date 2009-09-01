@@ -10,19 +10,24 @@ import org.apache.commons.io.FileUtils;
 
 public class GCodeMachine implements SenderListener
 {
-	private GCodeMachineListener listener;
-	private Sender sender;
-	private String fileContents;
-	private String fileName;
-	
-	void execImmediate(String gcode) {
-		listener.log("Immediate: " + gcode);
+	private GCodeMachineListener	listener;
+	private Sender					sender;
+	private Jogger					jogger;
+
+	private String					fileContents;
+	private String					fileName;
+	Iterator<String>				linesIterator;
+	private boolean					aborted;
+	private boolean					paused;
+	private boolean					busy;
+
+	void execImmediate(String line) {
+		send(line);
 	}
 	void jog(String direction) {
-		System.out.println(direction);
+		execImmediate(jogger.jog("1", direction));
 	}
-	Iterator<String> linesIterator;
-	private boolean aborted;
+	
 	void start() {
 		if (fileContents == null)
 			throw new IllegalStateException("No file is loaded, can't start");
@@ -34,34 +39,69 @@ public class GCodeMachine implements SenderListener
 	}
 
 	private void nextLine() {
+		if (linesIterator == null)
+			return;
 		if (aborted) {
 			listener.abortedPlaying(fileName);
+			linesIterator = null;
+			paused = false;
 			synchronized (this) { notifyAll(); }
 			return;
 		}
+		if (paused)
+			return;
 		if (!linesIterator.hasNext()) {
 			listener.finishedPlaying(fileName);
+			linesIterator = null;
 			synchronized (this) { notifyAll(); }
 			return;
 		}
 		String line = linesIterator.next();
-		sender.send(line + "\n");
-		listener.sentLine(line);
+		send(line);
 	}
 	
+	private void send(String line) {
+		sender.send(line + "\n");
+		listener.sentLine(line);
+		busy(true);
+	}
+	private void busy(boolean busy) {
+		this.setBusy(busy);
+		listener.busy(busy);
+	}
+
 	@Override
 	public void ok() {
+		busy(false);
 		nextLine();
 	}
 	@Override
 	public void status(String string) {
 		nextLine();
 	}
-
-	void abort() {
-		aborted = true;
+	public boolean isPlaying() {
+		return linesIterator != null;
 	}
-	void openFile(File f) throws IOException {
+
+	public void abort() {
+		aborted = true;
+		if (paused) 
+			nextLine();
+	}
+	public void pause() {
+		paused = true;
+		listener.pausedPlaying(fileName);
+	}
+	public void resume() {
+		paused = false;
+		listener.resumedPlaying(fileName);
+		nextLine();
+	}
+	public boolean isPaused() {
+		return paused;
+	}
+
+	public void openFile(File f) throws IOException {
 		fileName = f.getName();
 		fileContents = FileUtils.readFileToString(f);
 		fileContents = fileContents.replaceAll("\r", "");
@@ -82,5 +122,14 @@ public class GCodeMachine implements SenderListener
 	}
 	public Sender getSender() {
 		return sender;
+	}
+	public void setJogger(Jogger jogger) {
+		this.jogger = jogger;
+	}
+	public void setBusy(boolean busy) {
+		this.busy = busy;
+	}
+	public boolean isBusy() {
+		return busy;
 	}
 }
