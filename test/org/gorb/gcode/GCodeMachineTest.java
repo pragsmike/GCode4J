@@ -52,9 +52,11 @@ public class GCodeMachineTest
 		listener.startedPlaying("testLines.txt");
 		listener.busy(true);
 		listener.sentLine("G20");
+		listener.receivedLine("ok");
 		listener.busy(false);
 		listener.busy(true);
 		listener.sentLine("G91");
+		listener.receivedLine("ok");
 		listener.busy(false);
 		listener.finishedPlaying("testLines.txt");
 		replay(listener);
@@ -73,6 +75,7 @@ public class GCodeMachineTest
 		listener.startedPlaying("testLines.txt");
 		listener.busy(true);
 		listener.sentLine("G20");
+		listener.receivedLine("ok");
 		listener.busy(false);
 		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
 			@Override
@@ -99,6 +102,7 @@ public class GCodeMachineTest
 		listener.startedPlaying("testLines.txt");
 		listener.busy(true);
 		listener.sentLine("G20");
+		listener.receivedLine("ok");
 		listener.busy(false);
 		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
 			@Override
@@ -112,9 +116,11 @@ public class GCodeMachineTest
 		listener.startedPlaying("testLines.txt");
 		listener.busy(true);
 		listener.sentLine("G20");
+		listener.receivedLine("ok");
 		listener.busy(false);
 		listener.busy(true);
 		listener.sentLine("G91");
+		listener.receivedLine("ok");
 		listener.busy(false);
 		listener.finishedPlaying("testLines.txt");
 		replay(listener);
@@ -137,6 +143,7 @@ public class GCodeMachineTest
 	public void testExecImmediate() throws Exception {
 		listener.busy(true);
 		listener.sentLine("G20");
+		listener.receivedLine("ok");
 		listener.busy(false);
 		replay(listener);
 		
@@ -152,6 +159,7 @@ public class GCodeMachineTest
 		listener.startedPlaying("testLines.txt");
 		listener.busy(true);
 		listener.sentLine("G20");
+		listener.receivedLine("ok");
 		listener.busy(false);
 		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
 			@Override
@@ -165,6 +173,7 @@ public class GCodeMachineTest
 		listener.resumedPlaying("testLines.txt");
 		listener.busy(true);
 		listener.sentLine("G91");
+		listener.receivedLine("ok");
 		listener.busy(false);
 		listener.finishedPlaying("testLines.txt");
 		replay(listener);
@@ -193,6 +202,7 @@ public class GCodeMachineTest
 		listener.startedPlaying("testLines.txt");
 		listener.busy(true);
 		listener.sentLine("G20");
+		listener.receivedLine("ok");
 		listener.busy(false);
 		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
 			@Override
@@ -231,7 +241,7 @@ public class GCodeMachineTest
 		Sender sender = createMock(Sender.class);
 		
 		sender.setListener(machine);
-		expect(jogger.jog("1", "n")).andReturn("a");
+		expect(jogger.jog("0.001", "n")).andReturn("a");
 		sender.send("a\n");
 		replay(jogger, sender);
 		

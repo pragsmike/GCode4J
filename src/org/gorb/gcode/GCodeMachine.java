@@ -25,7 +25,7 @@ public class GCodeMachine implements SenderListener
 		send(line);
 	}
 	void jog(String direction) {
-		execImmediate(jogger.jog("1", direction));
+		execImmediate(jogger.jog("0.001", direction));
 	}
 	
 	void start() {
@@ -73,12 +73,20 @@ public class GCodeMachine implements SenderListener
 	@Override
 	public void ok() {
 		busy(false);
+		listener.receivedLine("ok");
 		nextLine();
 	}
 	@Override
 	public void status(String string) {
-		nextLine();
+		listener.receivedLine("ok");
 	}
+	
+	@Override
+	public void coldStarted() {
+		listener.sentLine("Controller has started");
+		execImmediate("G20\nG91\n");
+	}
+	
 	public boolean isPlaying() {
 		return linesIterator != null;
 	}
@@ -108,6 +116,9 @@ public class GCodeMachine implements SenderListener
 		listener.fileLoaded(fileName, fileContents);
 	}
 	
+	public void shutdown() {
+		sender.close();
+	}
 	
 	public void setListener(GCodeMachineListener listener) {
 		this.listener = listener;

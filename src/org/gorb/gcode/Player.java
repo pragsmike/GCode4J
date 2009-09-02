@@ -46,4 +46,9 @@ public class Player  implements SenderListener
 	public void status(String string) {
 		System.out.println(string);
 	}
+
+	@Override
+	public void coldStarted() {
+		System.out.println("Controller has started");
+	}
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.gorb.gcode;
 
 import processing.serial.PortableSerial;
@@ -8,6 +5,8 @@ import processing.serial.Serial;
 
 public class GCodeMachineSetter
 {
+	private static String			DEFAULT_SerialPortName = "simulator";;
+
 	public String[] getSerialPortNames() {
 		return Serial.list();
 	}
@@ -26,13 +25,16 @@ public class GCodeMachineSetter
 
 	public GCodeMachine buildMachine() {
 		GCodeMachine machine = new GCodeMachine();
-		machine.setSender(new SenderSimulator());
 		machine.setJogger(new Jogger());
+		setSerialPort(machine, DEFAULT_SerialPortName);
 		return machine;
 	}
 
 	public void setSerialPort(GCodeMachine machine, String serialPortName) {
-		Sender sender = new GCodeMachineSetter().getSender(serialPortName);
+		if (machine.getSender() != null) {
+			machine.getSender().close();
+		}
+		Sender sender = getSender(serialPortName);
 		machine.setSender(sender);
 	}
 }

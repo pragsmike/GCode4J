@@ -11,6 +11,12 @@ public class Sender implements SerialListener
 	private Serial outSerial;
 	protected SenderListener	senderListener;
 
+
+	public void close() {
+		outSerial.stop();
+		outSerial.dispose();
+	}
+
 	@Override
 	public void serialEvent(Serial s) {
 		int c = s.read();
@@ -24,7 +30,9 @@ public class Sender implements SerialListener
 		if (c == '\n' || c == '\r') {
 			if (buf.length() == 0)
 				return;
-			if ("ok".equals(buf.toString()) || "start".equals(buf.toString())) {
+			if ("start".equals(buf.toString())) {
+				senderListener.coldStarted();
+			} else if ("ok".equals(buf.toString())) {
 				senderListener.ok();
 			} else {
 				senderListener.status(buf.toString());
