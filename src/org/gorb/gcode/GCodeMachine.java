@@ -61,8 +61,8 @@ public class GCodeMachine implements SenderListener
 	}
 	
 	private void send(String line) {
-		sender.send(line + "\n");
 		listener.sentLine(line);
+		sender.send(line + "\n");
 		busy(true);
 	}
 	private void busy(boolean busy) {
@@ -78,7 +78,7 @@ public class GCodeMachine implements SenderListener
 	}
 	@Override
 	public void status(String string) {
-		listener.receivedLine("ok");
+		listener.receivedLine(string);
 	}
 	
 	@Override

@@ -22,12 +22,17 @@ public class SenderSimulator extends Sender
 		}
 
 		@Override
-		public void run() { try { respond(command); } catch (Throwable t) {}};
+		public void run() { 
+			try {
+				respond(command);
+			} catch (Throwable t) {}
+		};
 	}
 	
 	@Override
 	public void send(final String string) {
 		System.out.print("R " + string);
+		senderListener.status("Steppers enabled");
 		Responder responder = new Responder(string);
 
 		if (executor instanceof TimerTaskExecutor) {
@@ -38,6 +43,15 @@ public class SenderSimulator extends Sender
 	}
 	private void respond(String string) throws InterruptedException {
 		senderListener.ok();
+		Runnable r = new Runnable() {
+			public void run() {
+				senderListener.status("Steppers disabled");
+			}
+		};
+		if (executor instanceof TimerTaskExecutor) {
+			((TimerTaskExecutor) executor).setDelay(500);
+		}
+		executor.execute(r);
 	}
 	
 	@Override
