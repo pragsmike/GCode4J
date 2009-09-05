@@ -28,17 +28,32 @@ public class GCodeMachineTest
 		listener.fileLoaded("testLines.txt", "G20\nG91\n");
 		replay(listener);
 		
+		assertFalse(machine.isFileOpen());
 		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
+		assertTrue(machine.isFileOpen());
+		
+		verify(listener);
+	}
+
+	@Test
+	public void testReloadFile() throws Exception {
+		listener.fileLoaded("testLines.txt", "G20\nG91\n");
+		listener.fileLoaded("testLines.txt", "G20\nG91\n");
+		replay(listener);
+		
+		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
+		machine.reloadFile();
+		assertTrue(machine.isFileOpen());
 		
 		verify(listener);
 	}
 	
 	@Test
-	public void testStartNoFileLoaded() throws Exception {
+	public void testPlayNoFileLoaded() throws Exception {
 		replay(listener);
 
 		try {
-			machine.start();
+			machine.play();
 			fail("Should have thrown");
 		} catch (IllegalStateException e) {
 			assertEquals("No file is loaded, can't start", e.getMessage());
@@ -47,7 +62,7 @@ public class GCodeMachineTest
 		verify(listener);
 	}
 	@Test
-	public void testStartAndFinish() throws Exception {
+	public void testPlayAndFinish() throws Exception {
 		listener.fileLoaded("testLines.txt", "G20\nG91\n");
 		listener.startedPlaying("testLines.txt");
 		listener.busy(true);
@@ -62,7 +77,7 @@ public class GCodeMachineTest
 		replay(listener);
 		
 		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
-		machine.start();
+		machine.play();
 		
 		waitForMachine();
 		assertFalse(machine.isBusy());
@@ -70,7 +85,7 @@ public class GCodeMachineTest
 		verify(listener);
 	}
 	@Test
-	public void testStartAndAbort() throws Exception {
+	public void testPlayAndAbort() throws Exception {
 		listener.fileLoaded("testLines.txt", "G20\nG91\n");
 		listener.startedPlaying("testLines.txt");
 		listener.busy(true);
@@ -88,7 +103,7 @@ public class GCodeMachineTest
 		replay(listener);
 		
 		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
-		machine.start();
+		machine.play();
 		
 		waitForMachine();
 		assertFalse(machine.isPlaying());
@@ -96,8 +111,9 @@ public class GCodeMachineTest
 	} 
 
 	int countOfLogCalls = 0;
+	
 	@Test
-	public void testStartAndAbortThenStartAndFinish() throws Exception {
+	public void testPlayAndAbortThenPlayAndFinish() throws Exception {
 		listener.fileLoaded("testLines.txt", "G20\nG91\n");
 		listener.startedPlaying("testLines.txt");
 		listener.busy(true);
@@ -126,13 +142,13 @@ public class GCodeMachineTest
 		replay(listener);
 		
 		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
-		machine.start();
+		machine.play();
 		
 		waitForMachine();
 		assertFalse(machine.isPlaying());
 		
 		fakeSender.reset();
-		machine.start();
+		machine.play();
 		waitForMachine();
 		assertFalse(machine.isPlaying());
 
@@ -179,7 +195,7 @@ public class GCodeMachineTest
 		replay(listener);
 		
 		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
-		machine.start();
+		machine.play();
 		
 		waitForMachine();
 		assertTrue(machine.isPaused());
@@ -217,7 +233,7 @@ public class GCodeMachineTest
 		replay(listener);
 		
 		machine.openFile(new ClassPathResource("org/gorb/gcode/testLines.txt").getFile());
-		machine.start();
+		machine.play();
 		
 		waitForMachine();
 		assertTrue(machine.isPaused());

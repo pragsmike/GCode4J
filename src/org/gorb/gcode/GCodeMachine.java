@@ -20,6 +20,7 @@ public class GCodeMachine implements SenderListener
 	private boolean					aborted;
 	private boolean					paused;
 	private boolean					busy;
+	private File	openedFile;
 
 	void execImmediate(String line) {
 		send(line);
@@ -28,8 +29,8 @@ public class GCodeMachine implements SenderListener
 		execImmediate(jogger.jog("0.001", direction));
 	}
 	
-	void start() {
-		if (fileContents == null)
+	void play() {
+		if (!isFileOpen())
 			throw new IllegalStateException("No file is loaded, can't start");
 		listener.startedPlaying(fileName);
 		List<String> lines = Arrays.asList(fileContents.split("\n"));
@@ -109,11 +110,18 @@ public class GCodeMachine implements SenderListener
 		return paused;
 	}
 
+	public boolean isFileOpen() {
+		return fileContents != null;
+	}
 	public void openFile(File f) throws IOException {
+		openedFile = f;
 		fileName = f.getName();
 		fileContents = FileUtils.readFileToString(f);
 		fileContents = fileContents.replaceAll("\r", "");
 		listener.fileLoaded(fileName, fileContents);
+	}
+	public void reloadFile() throws IOException {
+		openFile(openedFile);
 	}
 	
 	public void shutdown() {

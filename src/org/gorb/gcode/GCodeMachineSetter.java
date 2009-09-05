@@ -1,12 +1,38 @@
 package org.gorb.gcode;
 
+import java.io.File;
+import java.io.IOException;
+
 import processing.serial.PortableSerial;
 import processing.serial.Serial;
 
 public class GCodeMachineSetter
 {
-	private static String			DEFAULT_SerialPortName = "simulator";;
+	private static final String	DEFAULT_SerialPortName	= "simulator";	;
+	private static final String	DEFAULT_INITIAL_FILE	= "gcode.txt";
 
+	public GCodeMachine buildMachine(GCodeMachineListener listener) {
+		GCodeMachine machine = new GCodeMachine();
+		machine.setListener(listener);
+		machine.setJogger(new Jogger());
+		setSerialPort(machine, DEFAULT_SerialPortName);
+
+		return machine;
+	}
+
+	public void startMachine(GCodeMachine machine) throws IOException {
+		if (!machine.isFileOpen())
+			machine.openFile(new File(DEFAULT_INITIAL_FILE));
+	}
+
+	public void setSerialPort(GCodeMachine machine, String serialPortName) {
+		if (machine.getSender() != null) {
+			machine.getSender().close();
+		}
+		Sender sender = getSender(serialPortName);
+		machine.setSender(sender);
+	}
+	
 	public String[] getSerialPortNames() {
 		return Serial.list();
 	}
@@ -23,18 +49,4 @@ public class GCodeMachineSetter
 		return sender;
 	}
 
-	public GCodeMachine buildMachine() {
-		GCodeMachine machine = new GCodeMachine();
-		machine.setJogger(new Jogger());
-		setSerialPort(machine, DEFAULT_SerialPortName);
-		return machine;
-	}
-
-	public void setSerialPort(GCodeMachine machine, String serialPortName) {
-		if (machine.getSender() != null) {
-			machine.getSender().close();
-		}
-		Sender sender = getSender(serialPortName);
-		machine.setSender(sender);
-	}
 }
