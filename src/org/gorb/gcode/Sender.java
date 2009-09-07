@@ -14,7 +14,6 @@ public class Sender implements SerialListener
 
 	public void close() {
 		outSerial.stop();
-		outSerial.dispose();
 	}
 
 	@Override

@@ -20,6 +20,10 @@ public class JoggerTest
 		assertEquals("G1 X-1 Y-1", jogger.jog("1", "SW"));
 		assertEquals("G1 X-1 Y1", jogger.jog("1", "NW"));
 		assertEquals("G1 X1 Y-1", jogger.jog("1", "SE"));
+		
+		assertEquals("G1 Z1", jogger.jog("1", "Up"));
+		assertEquals("G1 Z-1", jogger.jog("1", "Down"));
+
 
 		assertEquals("G1 X-2 Y-2", jogger.jog("2", "SW"));
 	}

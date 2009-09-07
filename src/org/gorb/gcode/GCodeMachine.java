@@ -25,8 +25,11 @@ public class GCodeMachine implements SenderListener
 	void execImmediate(String line) {
 		send(line);
 	}
+	void jog(String distance, String direction) {
+		execImmediate(jogger.jog(distance, direction));
+	}
 	void jog(String direction) {
-		execImmediate(jogger.jog("0.001", direction));
+		jog("0.001", direction);
 	}
 	
 	void play() {
