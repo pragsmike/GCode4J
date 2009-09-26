@@ -42,6 +42,10 @@ public class Sender implements SerialListener
 		buf.append((char)c);
 	}
 
+	public void send(String string) {
+		outSerial.write(string);
+	}
+
 	public void setOutSerial(Serial serial) {
 		this.outSerial = serial;
 	}
@@ -52,9 +56,5 @@ public class Sender implements SerialListener
 
 	public void setListener(SenderListener senderListener) {
 		this.senderListener = senderListener;
-	}
-
-	public void send(String string) {
-		outSerial.write(string);
 	}
 }

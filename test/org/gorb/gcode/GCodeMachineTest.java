@@ -266,4 +266,20 @@ public class GCodeMachineTest
 		machine.jog("n");
 		verify(jogger, sender);
 	}
+	
+	@Test
+	public void testChangeTool() throws Exception {
+		Sender sender = createMock(Sender.class);
+		sender.setListener(machine);
+		listener.pausedForChangeTool("T1");
+		listener.pausedPlaying(null);
+		replay(sender, listener);
+		
+		machine.setSender(sender);
+		machine.execImmediate("M06 T1");
+		
+		assertTrue("didn't pause for change tool", machine.isPaused());
+		
+		verify(sender, listener);
+	}
 }

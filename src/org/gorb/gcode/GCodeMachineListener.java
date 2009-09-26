@@ -10,8 +10,10 @@ public interface GCodeMachineListener
 	
 	void fileLoaded(String fileName, String fileContents);
 	void startedPlaying(String fileName);
-	void finishedPlaying(String string);
-	void abortedPlaying(String string);
-	void pausedPlaying(String string);
-	void resumedPlaying(String string);
+	void finishedPlaying(String fileName);
+	void abortedPlaying(String fileName);
+	void pausedPlaying(String fileName);
+	void resumedPlaying(String fileName);
+	
+	void pausedForChangeTool(String toolNumber);
 }
