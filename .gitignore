@@ -1,4 +1,7 @@
 bin
 .settings
 *.class
-
+target
+bin
+*~
+*.swp

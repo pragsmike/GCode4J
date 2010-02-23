@@ -15,5 +15,5 @@ public interface GCodeMachineListener
 	void pausedPlaying(String fileName);
 	void resumedPlaying(String fileName);
 	
-	void pausedForChangeTool(String toolNumber);
+//	void pausedForChangeTool(String toolNumber);
 }

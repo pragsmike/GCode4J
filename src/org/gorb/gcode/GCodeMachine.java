@@ -66,9 +66,9 @@ public class GCodeMachine implements SenderListener
 	
 	private void send(String line) {
 		if (line.trim().startsWith("M06")) {
-			listener.pausedForChangeTool(line.substring(3).trim());
-			pause();
-			return;
+//			listener.pausedForChangeTool(line.substring(3).trim());
+//			pause();
+//			return;
 		}
 		listener.sentLine(line);
 		sender.send(line + "\n");
