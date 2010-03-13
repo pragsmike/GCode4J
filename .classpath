@@ -3,12 +3,12 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/opt/processing-1.0.9-expert/libraries/serial/library/serial.jar">
+	<classpathentry kind="var" path="PROCESSING/lib/core.jar"/>
+	<classpathentry kind="var" path="PROCESSING/libraries/serial/library/RXTXcomm.jar"/>
+	<classpathentry kind="var" path="PROCESSING/libraries/serial/library/serial.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/opt/processing-1.0.9-expert/libraries/serial/library"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/opt/processing-1.0.9-expert/libraries/serial/library"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/opt/processing-1.0.9-expert/libraries/serial/library/RXTXcomm.jar"/>
-	<classpathentry kind="lib" path="C:/opt/processing-1.0.9-expert/lib/core.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
