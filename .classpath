@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="var" path="PROCESSING/lib/core.jar"/>
 	<classpathentry kind="var" path="PROCESSING/libraries/serial/library/RXTXcomm.jar"/>
 	<classpathentry kind="var" path="PROCESSING/libraries/serial/library/serial.jar">
@@ -10,5 +9,12 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/opt/processing-1.0.9-expert/libraries/serial/library"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="GROOVY_SUPPORT"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/2.5.6/spring-core-2.5.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-context/2.5.6/spring-context-2.5.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-beans/2.5.6/spring-beans-2.5.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-io/commons-io/1.4/commons-io-1.4.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
