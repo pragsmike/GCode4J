@@ -10,6 +10,7 @@ public class GCodeMachineSetter
 {
 	private static final String	DEFAULT_SerialPortName	= "simulator";	;
 	private static final String	DEFAULT_INITIAL_FILE	= "gcode.txt";
+	File initialFile = new File(DEFAULT_INITIAL_FILE);
 
 	public GCodeMachine buildMachine(GCodeMachineListener listener) {
 		GCodeMachine machine = new GCodeMachine();
@@ -21,8 +22,9 @@ public class GCodeMachineSetter
 	}
 
 	public void startMachine(GCodeMachine machine) throws IOException {
-		if (!machine.isFileOpen())
-			machine.openFile(new File(DEFAULT_INITIAL_FILE));
+		if (!machine.isFileOpen()) {
+			machine.openFile(initialFile);
+		}
 	}
 
 	public void setSerialPort(GCodeMachine machine, String serialPortName) {

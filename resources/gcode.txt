@@ -1,0 +1,3 @@
+(gcode test file)
+G0 X1 Y1 Z1
+M05
