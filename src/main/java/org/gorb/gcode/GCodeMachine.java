@@ -20,13 +20,21 @@ public class GCodeMachine implements SenderListener
 	private boolean					aborted;
 	private boolean					paused;
 	private boolean					busy;
-	private File	openedFile;
+	private File					openedFile;
+	boolean 						positionAbsolute = true;
 
 	void execImmediate(String line) {
 		send(line);
 	}
 	void jog(String distance, String direction) {
+		boolean wasAbsolute = positionAbsolute;
+		if (wasAbsolute) {
+			execImmediate("G91");
+		}
 		execImmediate(jogger.jog(distance, direction));
+		if (wasAbsolute) {
+			execImmediate("G90");
+		}
 	}
 	void jog(String direction) {
 		jog("0.001", direction);
@@ -64,11 +72,11 @@ public class GCodeMachine implements SenderListener
 		send(line);
 	}
 	
-	private void send(String line) {
-		if (line.trim().startsWith("M06")) {
-//			listener.pausedForChangeTool(line.substring(3).trim());
-//			pause();
-//			return;
+	void send(String line) {
+		if (line.trim().startsWith("G90")) {
+			positionAbsolute = true;
+		} else if (line.trim().startsWith("G91")) {
+			positionAbsolute = false;
 		}
 		listener.sentLine(line);
 		sender.send(line + "\n");
@@ -142,7 +150,7 @@ public class GCodeMachine implements SenderListener
 	}
 	public void setSender(Sender sender) {
 		this.sender = sender;
-		if (sender != null)
+		if (sender != null)				// TODO shouldn't MachineSetter do this?
 			sender.setListener(this);
 	}
 	public Sender getSender() {
@@ -156,5 +164,8 @@ public class GCodeMachine implements SenderListener
 	}
 	public boolean isBusy() {
 		return busy;
+	}
+	public boolean isPositionAbsolute() {
+		return positionAbsolute;
 	}
 }

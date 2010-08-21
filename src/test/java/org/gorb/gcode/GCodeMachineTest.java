@@ -248,19 +248,63 @@ public class GCodeMachineTest
 	}
 
 	@Test
-	public void testJog() throws Exception {
+	public void testJogInAbsoluteModeSendsG91andG90() throws Exception {
+		checkJog(true);
+	}
+	@Test
+	public void testJogInRelativeModeSendsNoG91orG90() throws Exception {
+		checkJog(false);
+	}
+
+
+	private void checkJog(boolean useAbsoluteMode) {
 		Jogger jogger = createMock(Jogger.class);
 		Sender sender = createMock(Sender.class);
-		
-		sender.setListener(machine);
+
+		sender.setListener(machine);	// TODO shouldn't MachineSetter do this?
+		if (useAbsoluteMode) {
+			sender.send("G91\n");
+		}
 		expect(jogger.jog("0.001", "n")).andReturn("a");
 		sender.send("a\n");
+		if (useAbsoluteMode) {
+			sender.send("G90\n");
+		}
 		replay(jogger, sender);
-		
+
+		machine.positionAbsolute = useAbsoluteMode;
 		machine.setJogger(jogger);
 		machine.setSender(sender);
 		machine.jog("n");
 		verify(jogger, sender);
+	}
+	
+	@Test
+	public void testPositionModeInitiallyAbsolute() throws Exception {
+		assertTrue(machine.isPositionAbsolute());
+	}
+	
+	@Test
+	public void testTracksAbsPositionMode() throws Exception {
+		Sender sender = createMock(Sender.class);
+		
+		sender.setListener(machine);
+		sender.send("G90\n");
+		sender.send("G91\n");
+		sender.send("G90\n");
+		replay(sender);
+		machine.setSender(sender);
+		
+		machine.send("G90");
+		assertTrue(machine.isPositionAbsolute());
+		
+		machine.send("G91");
+		assertFalse(machine.isPositionAbsolute());
+		
+		machine.send("G90");
+		assertTrue(machine.isPositionAbsolute());
+		
+		verify(sender);
 	}
 	
 

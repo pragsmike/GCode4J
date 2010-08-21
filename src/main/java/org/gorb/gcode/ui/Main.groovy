@@ -44,6 +44,7 @@ public class Main implements GCodeMachineListener {
 	def pauseButton
 	def busyLED
 	def playingLED
+	def positionModeIndicator
 	def mainPanel
 	def jogDistance
 	
@@ -121,11 +122,10 @@ public class Main implements GCodeMachineListener {
 			    		button ( constraints: BL.EAST, action: execAction)
 		    		}
 				    panel(name: "jogger", constraints: BL.CENTER) {
-
+						positionModeIndicator 	= label (text: "Absolute")
+						
 			    		jogDistance = textField(id: 'jogDistance', text: ".001")
 
-
-				    	
 				    	panel(name: "xyJogger") {
 				    		gridLayout(cols: 3, rows: 3)
 					        ["NW", "N", "NE", 
@@ -288,6 +288,7 @@ public class Main implements GCodeMachineListener {
     	abortButton.enabled = machine.playing
     	playingLED.enabled = machine.playing
     	busyLED.enabled = machine.busy
+		positionModeIndicator.text = (machine.positionAbsolute ? "Absolute" : "Relative")
     	if (machine.paused) {
     		pauseButton.text = "Resume"
     	} else {
