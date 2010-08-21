@@ -1,4 +1,3 @@
-
 package org.gorb.gcode.ui;
 
 import org.gorb.gcode.GCodeMachineSetter;
@@ -10,6 +9,7 @@ import javax.swing.Timer;
 
 import org.gorb.gcode.GCodeMachineListener;
 import org.gorb.gcode.SenderSimulator;
+import org.gorb.pcbgcode.DrillSplit;
 
 import javax.swing.Action;
 import javax.swing.JFileChooser;
@@ -67,6 +67,11 @@ public class Main implements GCodeMachineListener {
 		            menuItem(text: "Reload", mnemonic: 'R', actionPerformed: {
 			        	reloadFile() 
 		        	})
+		            separator()
+		            menuItem(text: "Split by tool...", mnemonic: 'P', actionPerformed: {
+		        		if(openFileDialog.showOpenDialog() != JFileChooser.APPROVE_OPTION) return //user canceled
+		        		splitFile openFileDialog.selectedFile 
+	        		})
 		            separator()
 		            menuItem(text: "Exit", mnemonic: 'X', actionPerformed: {dispose() })
 		        }
@@ -185,7 +190,11 @@ public class Main implements GCodeMachineListener {
 	}
 
 	void runStartupScript() {
-		setter.startMachine(machine)
+		try {
+			setter.startMachine(machine)
+		} catch (FileNotFoundException e) {
+			log("Error loading initial file: " + e.message)
+		}
 		updateControlsFromMachine()
 	}
 	void runShutdownScript() {
@@ -265,6 +274,10 @@ public class Main implements GCodeMachineListener {
 	}
 	void reloadFile() {
 		machine.reloadFile()
+	}
+
+	void splitFile(f) {
+		new DrillSplit().splitFile(f)
 	}
 
 	void updateControlsFromMachine() {

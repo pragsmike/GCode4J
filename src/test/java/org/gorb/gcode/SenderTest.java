@@ -1,10 +1,9 @@
 package org.gorb.gcode;
 
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
 import static org.easymock.classextension.EasyMock.*;
 
 import org.junit.Test;
-
 
 import processing.serial.Serial;
 

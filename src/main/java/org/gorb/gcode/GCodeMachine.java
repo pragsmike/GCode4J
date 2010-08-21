@@ -79,18 +79,16 @@ public class GCodeMachine implements SenderListener
 		listener.busy(busy);
 	}
 
-	@Override
 	public void ok() {
 		busy(false);
 		listener.receivedLine("ok");
 		nextLine();
 	}
-	@Override
+	
 	public void status(String string) {
 		listener.receivedLine(string);
 	}
 	
-	@Override
 	public void coldStarted() {
 		listener.sentLine("Controller has started");
 		execImmediate("G20\nG91\n");

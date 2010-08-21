@@ -16,7 +16,6 @@ public class Sender implements SerialListener
 		outSerial.stop();
 	}
 
-	@Override
 	public void serialEvent(Serial s) {
 		int c = s.read();
 		

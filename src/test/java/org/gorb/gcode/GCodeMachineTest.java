@@ -93,7 +93,6 @@ public class GCodeMachineTest
 		listener.receivedLine("ok");
 		listener.busy(false);
 		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
-			@Override
 			public Object answer() throws Throwable {
 				machine.abort();
 				return null;
@@ -121,7 +120,6 @@ public class GCodeMachineTest
 		listener.receivedLine("ok");
 		listener.busy(false);
 		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
-			@Override
 			public Object answer() throws Throwable {
 				if (countOfLogCalls++ == 0)
 					machine.abort();
@@ -178,7 +176,6 @@ public class GCodeMachineTest
 		listener.receivedLine("ok");
 		listener.busy(false);
 		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
-			@Override
 			public Object answer() throws Throwable {
 				if (countOfLogCalls++ == 0)
 					machine.pause();
@@ -221,7 +218,6 @@ public class GCodeMachineTest
 		listener.receivedLine("ok");
 		listener.busy(false);
 		EasyMock.expectLastCall().andAnswer(new IAnswer<Object>() {
-			@Override
 			public Object answer() throws Throwable {
 				if (countOfLogCalls++ == 0)
 					machine.pause();
