@@ -1,14 +1,15 @@
 package org.gorb.gcode.ui;
 
 import org.gorb.gcode.GCodeMachineSetter;
-import org.gorb.gcode.Jogger;
+import org.gorb.gcode.PlayerListener;
 
 import groovy.swing.SwingBuilder;
-import org.gorb.gcode.GCodeMachine;
 import javax.swing.Timer;
 
 import org.gorb.gcode.GCodeMachineListener;
-import org.gorb.gcode.SenderSimulator;
+import org.gorb.gcode.impl.GCodeMachine;
+import org.gorb.gcode.impl.Jogger;
+import org.gorb.gcode.sim.SenderSimulator;
 import org.gorb.pcbgcode.DrillSplit;
 
 import javax.swing.Action;
@@ -24,15 +25,17 @@ import java.awt.Rectangle;
 import javax.swing.JFrame;
 
 
-public class Main implements GCodeMachineListener {
+public class Main implements GCodeMachineListener, PlayerListener {
 	public static void main(String[] args) {
 		def ui = new Main()
 		def setter = new GCodeMachineSetter()
 		ui.setter = setter
 		ui.machine = setter.buildMachine(ui)
+		ui.player = setter.buildPlayer(ui.machine, ui)
 		ui.run()
 	}
 	def machine
+	def player
 	def setter
 	def swing = new SwingBuilder()
 	def openFileDialog
@@ -190,11 +193,6 @@ public class Main implements GCodeMachineListener {
 	}
 
 	void runStartupScript() {
-		try {
-			setter.startMachine(machine)
-		} catch (FileNotFoundException e) {
-			log("Error loading initial file: " + e.message)
-		}
 		updateControlsFromMachine()
 	}
 	void runShutdownScript() {
@@ -257,23 +255,23 @@ public class Main implements GCodeMachineListener {
 		machine.jog(distance, direction)
 	}
 	void start() {
-		machine.play()
+		player.play()
 	}
 	void abort() {
-		machine.abort()
+		player.abort()
 	}
 	void pauseOrResume() {
-    	if (machine.isPaused()) {
-    		machine.resume()
+    	if (player.isPaused()) {
+    		player.resume()
     	} else {
-    		machine.pause()
+    		player.pause()
     	}
 	}
 	void openFile(f) {
-		machine.openFile(f)
+		player.openFile(f)
 	}
 	void reloadFile() {
-		machine.reloadFile()
+		player.reloadFile()
 	}
 
 	void splitFile(f) {
@@ -283,13 +281,13 @@ public class Main implements GCodeMachineListener {
 	void updateControlsFromMachine() {
 		if (startButton == null)
 			return;
-		startButton.enabled = !machine.playing
-    	pauseButton.enabled = machine.playing
-    	abortButton.enabled = machine.playing
-    	playingLED.enabled = machine.playing
+		startButton.enabled = (!player.playing && player.fileOpen)
+    	pauseButton.enabled = player.playing
+    	abortButton.enabled = player.playing
+    	playingLED.enabled = player.playing
     	busyLED.enabled = machine.busy
 		positionModeIndicator.text = (machine.positionAbsolute ? "Absolute" : "Relative")
-    	if (machine.paused) {
+    	if (player.paused) {
     		pauseButton.text = "Resume"
     	} else {
     		pauseButton.text = "Pause"

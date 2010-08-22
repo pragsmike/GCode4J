@@ -1,10 +1,11 @@
 /**
  * 
  */
-package org.gorb.gcode;
+package org.gorb.gcode.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
 
 class FakeSender extends Sender
 {

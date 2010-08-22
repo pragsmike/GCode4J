@@ -1,7 +1,8 @@
-package org.gorb.gcode;
+package org.gorb.gcode.impl;
 
 import static org.junit.Assert.*;
 
+import org.gorb.gcode.impl.Jogger;
 import org.junit.Test;
 
 public class JoggerTest
