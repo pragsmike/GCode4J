@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CADFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Untitled" units="Inches">
+  <layers>
+    <layer name="Default" color="139,0,0">
+      <mat />
+      <objects>
+        <pline id="3798" Closed="true">
+          <mat />
+          <pts>
+            <p>0.52,1.59,-0.002</p>
+            <p>0.77,1.59,-0.002</p>
+            <p>0.77,1.84,-0.002</p>
+            <p>0.52,1.84,-0.002</p>
+            <p>0.52,1.59,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3799" Closed="true">
+          <mat />
+          <pts>
+            <p>0.26,0.78,-0.002</p>
+            <p>0.51,0.78,-0.002</p>
+            <p>0.51,1.03,-0.002</p>
+            <p>0.26,1.03,-0.002</p>
+            <p>0.26,0.78,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3800" Closed="true">
+          <mat />
+          <pts>
+            <p>0.52,1.325,-0.002</p>
+            <p>0.77,1.325,-0.002</p>
+            <p>0.77,1.575,-0.002</p>
+            <p>0.52,1.575,-0.002</p>
+            <p>0.52,1.325,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3801" Closed="true">
+          <mat />
+          <pts>
+            <p>0.26,2.08,-0.002</p>
+            <p>0.51,2.08,-0.002</p>
+            <p>0.51,2.33,-0.002</p>
+            <p>0.26,2.33,-0.002</p>
+            <p>0.26,2.08,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3802" Closed="true">
+          <mat />
+          <pts>
+            <p>0.26,1.04,-0.002</p>
+            <p>0.51,1.04,-0.002</p>
+            <p>0.51,1.29,-0.002</p>
+            <p>0.26,1.29,-0.002</p>
+            <p>0.26,1.04,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3803" Closed="true">
+          <mat />
+          <pts>
+            <p>0.26,1.3,-0.002</p>
+            <p>0.51,1.3,-0.002</p>
+            <p>0.51,1.55,-0.002</p>
+            <p>0.26,1.55,-0.002</p>
+            <p>0.26,1.3,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3804" Closed="true">
+          <mat />
+          <pts>
+            <p>0,1.785,-0.002</p>
+            <p>0.25,1.785,-0.002</p>
+            <p>0.25,2.035,-0.002</p>
+            <p>0,2.035,-0.002</p>
+            <p>0,1.785,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3805" Closed="true">
+          <mat />
+          <pts>
+            <p>0.78,2.43,-0.002</p>
+            <p>1.03,2.43,-0.002</p>
+            <p>1.03,2.68,-0.002</p>
+            <p>0.78,2.68,-0.002</p>
+            <p>0.78,2.43,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3806" Closed="true">
+          <mat />
+          <pts>
+            <p>0.26,0,-0.002</p>
+            <p>0.51,0,-0.002</p>
+            <p>0.51,0.25,-0.002</p>
+            <p>0.26,0.25,-0.002</p>
+            <p>0.26,0,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3807" Closed="true">
+          <mat />
+          <pts>
+            <p>0.26,1.82,-0.002</p>
+            <p>0.51,1.82,-0.002</p>
+            <p>0.51,2.07,-0.002</p>
+            <p>0.26,2.07,-0.002</p>
+            <p>0.26,1.82,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3808" Closed="true">
+          <mat />
+          <pts>
+            <p>0.52,1.06,-0.002</p>
+            <p>0.77,1.06,-0.002</p>
+            <p>0.77,1.31,-0.002</p>
+            <p>0.52,1.31,-0.002</p>
+            <p>0.52,1.06,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3809" Closed="true">
+          <mat />
+          <pts>
+            <p>0.26,0.26,-0.002</p>
+            <p>0.51,0.26,-0.002</p>
+            <p>0.51,0.51,-0.002</p>
+            <p>0.26,0.51,-0.002</p>
+            <p>0.26,0.26,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3810" Closed="true">
+          <mat />
+          <pts>
+            <p>0.78,1.89,-0.002</p>
+            <p>1.03,1.89,-0.002</p>
+            <p>1.03,2.14,-0.002</p>
+            <p>0.78,2.14,-0.002</p>
+            <p>0.78,1.89,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3811" Closed="true">
+          <mat />
+          <pts>
+            <p>0,0,-0.002</p>
+            <p>0.25,0,-0.002</p>
+            <p>0.25,0.25,-0.002</p>
+            <p>0,0.25,-0.002</p>
+            <p>0,0,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3812" Closed="true">
+          <mat />
+          <pts>
+            <p>0,2.295,-0.002</p>
+            <p>0.25,2.295,-0.002</p>
+            <p>0.25,2.545,-0.002</p>
+            <p>0,2.545,-0.002</p>
+            <p>0,2.295,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3813" Closed="true">
+          <mat />
+          <pts>
+            <p>0,0.765,-0.002</p>
+            <p>0.25,0.765,-0.002</p>
+            <p>0.25,1.015,-0.002</p>
+            <p>0,1.015,-0.002</p>
+            <p>0,0.765,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3814" Closed="true">
+          <mat />
+          <pts>
+            <p>0.78,1.08,-0.002</p>
+            <p>1.03,1.08,-0.002</p>
+            <p>1.03,1.33,-0.002</p>
+            <p>0.78,1.33,-0.002</p>
+            <p>0.78,1.08,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3815" Closed="true">
+          <mat />
+          <pts>
+            <p>0.52,0.265,-0.002</p>
+            <p>0.77,0.265,-0.002</p>
+            <p>0.77,0.515,-0.002</p>
+            <p>0.52,0.515,-0.002</p>
+            <p>0.52,0.265,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3816" Closed="true">
+          <mat />
+          <pts>
+            <p>0,2.04,-0.002</p>
+            <p>0.25,2.04,-0.002</p>
+            <p>0.25,2.29,-0.002</p>
+            <p>0,2.29,-0.002</p>
+            <p>0,2.04,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3817" Closed="true">
+          <mat />
+          <pts>
+            <p>0,1.02,-0.002</p>
+            <p>0.25,1.02,-0.002</p>
+            <p>0.25,1.27,-0.002</p>
+            <p>0,1.27,-0.002</p>
+            <p>0,1.02,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3818" Closed="true">
+          <mat />
+          <pts>
+            <p>0.26,0.52,-0.002</p>
+            <p>0.51,0.52,-0.002</p>
+            <p>0.51,0.77,-0.002</p>
+            <p>0.26,0.77,-0.002</p>
+            <p>0.26,0.52,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3819" Closed="true">
+          <mat />
+          <pts>
+            <p>0.52,2.12,-0.002</p>
+            <p>0.77,2.12,-0.002</p>
+            <p>0.77,2.37,-0.002</p>
+            <p>0.52,2.37,-0.002</p>
+            <p>0.52,2.12,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3820" Closed="true">
+          <mat />
+          <pts>
+            <p>0.52,2.385,-0.002</p>
+            <p>0.77,2.385,-0.002</p>
+            <p>0.77,2.635,-0.002</p>
+            <p>0.52,2.635,-0.002</p>
+            <p>0.52,2.385,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3821" Closed="true">
+          <mat />
+          <pts>
+            <p>0.52,0,-0.002</p>
+            <p>0.77,0,-0.002</p>
+            <p>0.77,0.25,-0.002</p>
+            <p>0.52,0.25,-0.002</p>
+            <p>0.52,0,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3822" Closed="true">
+          <mat />
+          <pts>
+            <p>0.78,0.54,-0.002</p>
+            <p>1.03,0.54,-0.002</p>
+            <p>1.03,0.79,-0.002</p>
+            <p>0.78,0.79,-0.002</p>
+            <p>0.78,0.54,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3823" Closed="true">
+          <mat />
+          <pts>
+            <p>0,0.255,-0.002</p>
+            <p>0.25,0.255,-0.002</p>
+            <p>0.25,0.505,-0.002</p>
+            <p>0,0.505,-0.002</p>
+            <p>0,0.255,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3824" Closed="true">
+          <mat />
+          <pts>
+            <p>0.78,2.16,-0.002</p>
+            <p>1.03,2.16,-0.002</p>
+            <p>1.03,2.41,-0.002</p>
+            <p>0.78,2.41,-0.002</p>
+            <p>0.78,2.16,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3825" Closed="true">
+          <mat />
+          <pts>
+            <p>0.52,1.855,-0.002</p>
+            <p>0.77,1.855,-0.002</p>
+            <p>0.77,2.105,-0.002</p>
+            <p>0.52,2.105,-0.002</p>
+            <p>0.52,1.855,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3826" Closed="true">
+          <mat />
+          <pts>
+            <p>0.78,0.81,-0.002</p>
+            <p>1.03,0.81,-0.002</p>
+            <p>1.03,1.06,-0.002</p>
+            <p>0.78,1.06,-0.002</p>
+            <p>0.78,0.81,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3827" Closed="true">
+          <mat />
+          <pts>
+            <p>0.26,1.56,-0.002</p>
+            <p>0.51,1.56,-0.002</p>
+            <p>0.51,1.81,-0.002</p>
+            <p>0.26,1.81,-0.002</p>
+            <p>0.26,1.56,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3828" Closed="true">
+          <mat />
+          <pts>
+            <p>0,1.53,-0.002</p>
+            <p>0.25,1.53,-0.002</p>
+            <p>0.25,1.78,-0.002</p>
+            <p>0,1.78,-0.002</p>
+            <p>0,1.53,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3829" Closed="true">
+          <mat />
+          <pts>
+            <p>0.52,0.795,-0.002</p>
+            <p>0.77,0.795,-0.002</p>
+            <p>0.77,1.045,-0.002</p>
+            <p>0.52,1.045,-0.002</p>
+            <p>0.52,0.795,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3830" Closed="true">
+          <mat />
+          <pts>
+            <p>0.78,1.62,-0.002</p>
+            <p>1.03,1.62,-0.002</p>
+            <p>1.03,1.87,-0.002</p>
+            <p>0.78,1.87,-0.002</p>
+            <p>0.78,1.62,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3831" Closed="true">
+          <mat />
+          <pts>
+            <p>0.26,2.34,-0.002</p>
+            <p>0.51,2.34,-0.002</p>
+            <p>0.51,2.59,-0.002</p>
+            <p>0.26,2.59,-0.002</p>
+            <p>0.26,2.34,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3832" Closed="true">
+          <mat />
+          <pts>
+            <p>0.52,0.53,-0.002</p>
+            <p>0.77,0.53,-0.002</p>
+            <p>0.77,0.78,-0.002</p>
+            <p>0.52,0.78,-0.002</p>
+            <p>0.52,0.53,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3833" Closed="true">
+          <mat />
+          <pts>
+            <p>0.78,0.27,-0.002</p>
+            <p>1.03,0.27,-0.002</p>
+            <p>1.03,0.52,-0.002</p>
+            <p>0.78,0.52,-0.002</p>
+            <p>0.78,0.27,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3834" Closed="true">
+          <mat />
+          <pts>
+            <p>0,0.51,-0.002</p>
+            <p>0.25,0.51,-0.002</p>
+            <p>0.25,0.76,-0.002</p>
+            <p>0,0.76,-0.002</p>
+            <p>0,0.51,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3835" Closed="true">
+          <mat />
+          <pts>
+            <p>0.78,0,-0.002</p>
+            <p>1.03,0,-0.002</p>
+            <p>1.03,0.25,-0.002</p>
+            <p>0.78,0.25,-0.002</p>
+            <p>0.78,0,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3836" Closed="true">
+          <mat />
+          <pts>
+            <p>0,1.275,-0.002</p>
+            <p>0.25,1.275,-0.002</p>
+            <p>0.25,1.525,-0.002</p>
+            <p>0,1.525,-0.002</p>
+            <p>0,1.275,-0.002</p>
+          </pts>
+        </pline>
+        <pline id="3837" Closed="true">
+          <mat />
+          <pts>
+            <p>0.78,1.35,-0.002</p>
+            <p>1.03,1.35,-0.002</p>
+            <p>1.03,1.6,-0.002</p>
+            <p>0.78,1.6,-0.002</p>
+            <p>0.78,1.35,-0.002</p>
+          </pts>
+        </pline>
+      </objects>
+    </layer>
+    <layer name="captions" color="139,0,0">
+      <mat />
+      <objects>
+        <text id="3794" p1="0.05,0,0" Height="0.15">
+          <mat />5</text>
+        <text id="3795" p1="0.31,0,0" Height="0.15">
+          <mat />10</text>
+        <text id="3796" p1="0.57,0,0" Height="0.15">
+          <mat />15</text>
+        <text id="3797" p1="0.83,0,0" Height="0.15">
+          <mat />20</text>
+      </objects>
+    </layer>
+  </layers>
+  <MachiningOptions>
+    <OutFile>a.nc</OutFile>
+    <SplineCurveSteps>12</SplineCurveSteps>
+    <TextCurveSteps>5</TextCurveSteps>
+  </MachiningOptions>
+  <machineops>
+    <mop xsi:type="MOPProfile">
+      <OptimisationMode>None</OptimisationMode>
+      <ToolDiameter>0.016</ToolDiameter>
+      <PlungeFeedrate>8</PlungeFeedrate>
+      <CutFeedrate>12</CutFeedrate>
+      <ClearancePlane>0.1</ClearancePlane>
+      <primitive>
+        <prim>3798</prim>
+        <prim>3799</prim>
+        <prim>3800</prim>
+        <prim>3801</prim>
+        <prim>3802</prim>
+        <prim>3803</prim>
+        <prim>3804</prim>
+        <prim>3805</prim>
+        <prim>3806</prim>
+        <prim>3807</prim>
+        <prim>3808</prim>
+        <prim>3809</prim>
+        <prim>3810</prim>
+        <prim>3811</prim>
+        <prim>3812</prim>
+        <prim>3813</prim>
+        <prim>3814</prim>
+        <prim>3815</prim>
+        <prim>3816</prim>
+        <prim>3817</prim>
+        <prim>3818</prim>
+        <prim>3819</prim>
+        <prim>3820</prim>
+        <prim>3821</prim>
+        <prim>3822</prim>
+        <prim>3823</prim>
+        <prim>3824</prim>
+        <prim>3825</prim>
+        <prim>3826</prim>
+        <prim>3827</prim>
+        <prim>3828</prim>
+        <prim>3829</prim>
+        <prim>3830</prim>
+        <prim>3831</prim>
+        <prim>3832</prim>
+        <prim>3833</prim>
+        <prim>3834</prim>
+        <prim>3835</prim>
+        <prim>3836</prim>
+        <prim>3837</prim>
+      </primitive>
+      <mat />
+      <StockSurface>0</StockSurface>
+      <TargetDepth>-0.002</TargetDepth>
+      <DepthIncrement>1</DepthIncrement>
+      <FinalDepthIncrement>0</FinalDepthIncrement>
+      <CutWidth>0</CutWidth>
+      <InsideOutside>Inside</InsideOutside>
+    </mop>
+    <mop xsi:type="MOPEngrave">
+      <ToolDiameter>0.016</ToolDiameter>
+      <PlungeFeedrate>8</PlungeFeedrate>
+      <CutFeedrate>12</CutFeedrate>
+      <ClearancePlane>0.1</ClearancePlane>
+      <primitive>
+        <prim>3794</prim>
+        <prim>3795</prim>
+        <prim>3796</prim>
+        <prim>3797</prim>
+      </primitive>
+      <mat />
+      <TargetDepth>-0.002</TargetDepth>
+    </mop>
+  </machineops>
+  <ActiveLayer>captions</ActiveLayer>
+</CADFile>
