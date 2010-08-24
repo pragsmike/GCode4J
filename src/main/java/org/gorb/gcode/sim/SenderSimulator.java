@@ -1,9 +1,10 @@
-package org.gorb.gcode;
+package org.gorb.gcode.sim;
 
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.gorb.gcode.impl.Sender;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.timer.TimerTaskExecutor;
 

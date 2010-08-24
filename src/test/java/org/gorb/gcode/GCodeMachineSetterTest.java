@@ -1,12 +1,14 @@
 package org.gorb.gcode;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.easymock.classextension.EasyMock.*;
+import static org.junit.Assert.*;
 
+import org.gorb.gcode.impl.GCodeMachine;
+import org.gorb.gcode.impl.Player;
+import org.gorb.gcode.impl.Sender;
+import org.gorb.gcode.sim.SenderSimulator;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 
 
 public class GCodeMachineSetterTest
@@ -14,6 +16,7 @@ public class GCodeMachineSetterTest
 	GCodeMachineSetter setter = new GCodeMachineSetter();
 	
 	GCodeMachineListener listener = createMock(GCodeMachineListener.class);
+	PlayerListener playerListener = createMock(PlayerListener.class);
 	
 	@Test
 	public void testBuildMachine() throws Exception {
@@ -21,30 +24,18 @@ public class GCodeMachineSetterTest
 		GCodeMachine machine = setter.buildMachine(listener);
 		Sender sender = machine.getSender();
 		assertTrue(sender instanceof SenderSimulator);
-		assertFalse(machine.isFileOpen());
 		verify(listener);
+	}
+	@Test
+	public void testBuildPlayer() throws Exception {
+		GCodeMachine machine = createMock(GCodeMachine.class);
+		machine.addListener((GCodeMachineListener) anyObject());
+		replay(machine, listener);
+		Player player = setter.buildPlayer(machine, playerListener);
+		assertFalse(player.isFileOpen());
+		verify(machine, listener);
 	}
 
-	@Test
-	public void testStartOpensInitialFile() throws Exception {
-		listener.fileLoaded(eq("gcode.txt"), (String) anyObject());
-		replay(listener);
-		setter.initialFile = new ClassPathResource("gcode.txt").getFile();
-		GCodeMachine machine = setter.buildMachine(listener);
-		setter.startMachine(machine);
-		assertTrue(machine.isFileOpen());
-		verify(listener);
-	}
-	@Test
-	public void testStartDoesNothingOnSubsequentCalls() throws Exception {
-		listener.fileLoaded(eq("gcode.txt"), (String) anyObject());
-		replay(listener);
-		setter.initialFile = new ClassPathResource("gcode.txt").getFile();
-		GCodeMachine machine = setter.buildMachine(listener);
-		setter.startMachine(machine);
-		setter.startMachine(machine);
-		verify(listener);
-	}
 
 	@Test
 	public void testGetSenderSimulator() throws Exception {

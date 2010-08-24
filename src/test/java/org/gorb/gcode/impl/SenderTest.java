@@ -1,8 +1,10 @@
-package org.gorb.gcode;
+package org.gorb.gcode.impl;
 
 import static org.easymock.EasyMock.*;
 import static org.easymock.classextension.EasyMock.*;
 
+import org.gorb.gcode.SenderListener;
+import org.gorb.gcode.impl.Sender;
 import org.junit.Test;
 
 import processing.serial.Serial;

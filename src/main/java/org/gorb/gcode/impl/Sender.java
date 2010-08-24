@@ -1,7 +1,9 @@
 /**
  * 
  */
-package org.gorb.gcode;
+package org.gorb.gcode.impl;
+
+import org.gorb.gcode.SenderListener;
 
 import processing.serial.Serial;
 import processing.serial.SerialListener;

@@ -1,4 +1,4 @@
-package org.gorb.gcode;
+package org.gorb.gcode.impl;
 
 public class Jogger
 {
