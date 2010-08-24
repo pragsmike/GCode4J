@@ -16,9 +16,9 @@ captionsLayer.Entities.Clear();
 doc.MachineOps.Clear();
 doc.MachiningOptions.OutFile = "a.nc";
 
-var cellW = .260;
-var cellH = .255;
-var w = .25;
+var cellW = .135;
+var cellH = .130;
+var w = .125;
 var h = w;
 
 var x = 0;
@@ -80,7 +80,7 @@ function generatePoints() {
 			points.push([i*cellW,j*cellH]);
 		}
 		var separation = int((cellH - h) * 1000);
-	    drawColumnCaption(separation , i * cellW + .05);
+	    drawColumnCaption(separation , i * cellW + .01);
 		cellH += .005;
 	
 	}
@@ -97,7 +97,7 @@ function drawStoredPoints(points) {
 function drawColumnCaption(c, x) {
 	var mt = new MText();
 	mt.Text = c+"";
-	mt.Height = ".15";
+	mt.Height = ".10";
 	mt.Location = x + ",0,-.002";
 	captionsLayer.Entities.Add(mt);
 }
